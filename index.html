@@ -330,18 +330,24 @@
         }
 
         // --- LOGIN ---
-        // Headers dihilangkan agar tidak kena blokir CORS browser
         async function loginAdmin() {
             let username = document.getElementById("adminUser").value;
             let pass = document.getElementById("adminPass").value;
-            if (!username.trim() || !pass) { showToast("Username dan password wajib diisi!", true); return; }
+            if (!username.trim() || !pass) { 
+                showToast("Username dan password wajib diisi!", true); 
+                return; 
+            }
             
+            // Nonaktifkan tombol agar tidak diklik berulang saat loading
+            showToast("Sedang memproses login...", false);
+
             try {
                 let res = await fetch(GAS_URL, { 
                     method: "POST", 
                     body: JSON.stringify({action: "login", username: username, password: pass}) 
                 });
                 let data = await res.json();
+                
                 if(data.status === "success") {
                     authToken = data.token;
                     currentRole = data.role || "";
@@ -356,6 +362,7 @@
                     showToast(data.message, true);
                 }
             } catch(err) {
+                // JIKA ADA ERROR, PESAN ERRORNYA AKAN LANGSUNG TAMPIL DI LAYAR
                 showToast("Gagal terhubung ke server: " + err.message, true);
             }
         }
