@@ -42,7 +42,17 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                    <input type="password" id="adminPass" placeholder="Masukkan Password" autocomplete="current-password" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition" onkeypress="if(event.key==='Enter') loginAdmin()">
+                    <div class="relative">
+                        <input type="password" id="adminPass" placeholder="Masukkan Password" autocomplete="current-password" class="w-full p-3 pr-10 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition" onkeypress="if(event.key==='Enter') loginAdmin()">
+                        <button type="button" onclick="togglePasswordVisibility()" tabindex="-1" class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-gray-600">
+                            <svg id="icon-eye-show" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            <svg id="icon-eye-hide" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path></svg>
+                        </button>
+                    </div>
+                    <label class="flex items-center gap-2 mt-2 text-sm text-gray-500 select-none cursor-pointer">
+                        <input type="checkbox" id="showPasswordCheckbox" onchange="togglePasswordVisibility()" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                        Tampilkan Password
+                    </label>
                 </div>
                 <button onclick="loginAdmin()" class="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition shadow-md">Login Sekarang</button>
             </div>
@@ -291,6 +301,21 @@
 
         document.getElementById("current-date").innerText = new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
+        // Tampilkan/sembunyikan password di halaman login. Dipicu oleh checkbox
+        // "Tampilkan Password" maupun ikon mata di dalam input.
+        function togglePasswordVisibility() {
+            const passInput = document.getElementById("adminPass");
+            const checkbox = document.getElementById("showPasswordCheckbox");
+            const iconShow = document.getElementById("icon-eye-show");
+            const iconHide = document.getElementById("icon-eye-hide");
+            // Ikon mata & checkbox saling sinkron: klik salah satu mengubah keduanya.
+            const willShow = passInput.type === "password";
+            passInput.type = willShow ? "text" : "password";
+            checkbox.checked = willShow;
+            iconShow.classList.toggle("hidden", willShow);
+            iconHide.classList.toggle("hidden", !willShow);
+        }
+
         function toggleSidebar() {
             const sb = document.getElementById('sidebar');
             sb.classList.toggle('-translate-x-full');
@@ -317,6 +342,7 @@
         async function loginAdmin() {
             let username = document.getElementById("adminUser").value;
             let pass = document.getElementById("adminPass").value;
+            if (!username.trim() || !pass) { showToast("Username dan password wajib diisi!", true); return; }
             let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify({action: "login", username: username, password: pass}), headers: {"Content-Type": "text/plain;charset=utf-8"} });
             let data = await res.json();
             if(data.status === "success") {
