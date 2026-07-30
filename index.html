@@ -6,6 +6,7 @@
     <title>MANBA BOOKS - Perpustakaan Digital</title>
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#2563eb">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='32' fill='%232563eb'/%3E%3Ctext x='96' y='120' font-family='Arial,sans-serif' font-size='72' font-weight='bold' fill='white' text-anchor='middle'%3EMB%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
@@ -41,13 +42,7 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                    <div class="relative">
-                        <input type="password" id="adminPass" placeholder="Masukkan Password" autocomplete="current-password" class="w-full p-3 pr-10 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition" onkeypress="if(event.key==='Enter') loginAdmin()">
-                        <button type="button" onclick="togglePasswordVisibility()" tabindex="-1" class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-gray-600">
-                            <svg id="icon-eye-show" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                            <svg id="icon-eye-hide" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path></svg>
-                        </button>
-                    </div>
+                    <input type="password" id="adminPass" placeholder="Masukkan Password" autocomplete="current-password" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition" onkeypress="if(event.key==='Enter') loginAdmin()">
                 </div>
                 <button onclick="loginAdmin()" class="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition shadow-md">Login Sekarang</button>
             </div>
@@ -103,20 +98,14 @@
             <div id="tab-scan" class="tab-content hidden">
                 <div class="bg-white p-6 rounded-xl shadow-sm border max-w-2xl mx-auto">
                     <div class="grid grid-cols-2 gap-4 mb-4">
-                        <button id="btnPinjam" onclick="startScan('pinjam')" class="bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-medium flex items-center justify-center gap-2 transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg> Pinjam Buku</button>
-                        <button id="btnKembali" onclick="startScan('kembali')" class="bg-green-600 hover:bg-green-700 text-white py-4 rounded-lg font-medium flex items-center justify-center gap-2 transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path></svg> Kembalikan Buku</button>
+                        <button id="btnPinjam" class="bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-medium flex items-center justify-center gap-2 transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg> Pinjam Buku</button>
+                        <button id="btnKembali" class="bg-green-600 hover:bg-green-700 text-white py-4 rounded-lg font-medium flex items-center justify-center gap-2 transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path></svg> Kembalikan Buku</button>
                     </div>
                     <div id="alertBox" class="hidden p-4 mb-4 rounded-lg text-white text-center font-medium"></div>
                     <div id="scannerSection" class="hidden text-center mt-4">
                         <h3 id="scanTitle" class="text-lg font-medium mb-3 text-gray-700">Memindai...</h3>
                         <div id="reader" class="border-4 border-blue-100 rounded-xl overflow-hidden shadow-inner"></div>
                         <button onclick="stopScan()" class="mt-4 px-6 bg-red-500 text-white py-2 rounded-lg font-medium">Batal Scan</button>
-                    </div>
-                    <div id="manualInputSection" class="mt-6 hidden">
-                        <h3 class="text-lg font-medium mb-3 text-gray-700">Input Manual</h3>
-                        <input type="text" id="manualNISN" placeholder="NISN/NIS Siswa" class="w-full p-2 border rounded mb-2 text-sm outline-none focus:ring-2 focus:ring-blue-500">
-                        <input type="text" id="manualKodeBuku" placeholder="Kode Buku" class="w-full p-2 border rounded mb-2 text-sm outline-none focus:ring-2 focus:ring-blue-500">
-                        <button onclick="submitManualTransaction()" class="w-full bg-blue-600 text-white py-2 rounded-lg font-medium">Proses Transaksi</button>
                     </div>
                 </div>
             </div>
@@ -202,10 +191,11 @@
             <div id="tab-katalog" class="tab-content hidden">
                 <div class="bg-white p-6 rounded-xl shadow-sm border mb-6">
                     <h3 class="font-bold mb-4 text-gray-700">Tambah Buku Digital (PDF)</h3>
+                    <p class="text-xs text-gray-400 mb-4">File PDF disimpan di Google Drive dan dibagikan sebagai "siapa saja yang punya tautan" agar bisa dibaca dari aplikasi. Jangan unggah dokumen berbayar/berhak cipta ketat. Ukuran maksimal sekitar 20MB.</p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                         <input id="kt-judul" placeholder="Judul Buku" class="p-2 border rounded text-sm focus:ring-2 focus:ring-blue-500 outline-none">
                         <input id="kt-pengarang" placeholder="Pengarang" class="p-2 border rounded text-sm focus:ring-2 focus:ring-blue-500 outline-none">
-                        <input id="kt-kategori" placeholder="Kategori" class="p-2 border rounded text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <input id="kt-kategori" placeholder="Kategori (cth: Fiksi, Sains)" class="p-2 border rounded text-sm focus:ring-2 focus:ring-blue-500 outline-none">
                         <div class="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-2">
                             <img id="kt-cover-preview" src="" alt="Preview Cover" class="h-20 w-16 object-cover rounded mb-2 hidden">
                             <input id="kt-cover" type="file" accept="image/*" class="text-xs text-gray-500" onchange="previewKatalogCover(event)">
@@ -232,15 +222,16 @@
             <div id="tab-qr" class="tab-content hidden">
                 <div class="bg-white p-6 rounded-xl shadow-sm border">
                     <h3 class="font-bold mb-4 text-gray-700">Generator QR Code</h3>
+                    <p class="text-gray-500 text-sm mb-6">Pilih data untuk membuat QR Code. Klik kanan pada gambar untuk menyimpan/mencetak.</p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="text-center p-6 border rounded-xl bg-gray-50">
                             <h4 class="font-medium text-gray-800 mb-4">QR Code Buku</h4>
-                            <select id="qr-buku-select" class="w-full p-2 border rounded mb-4 text-sm" onchange="generateQR('buku')"></select>
+                            <select id="qr-buku-select" class="w-full p-2 border rounded mb-4 text-sm"></select>
                             <div id="qr-buku-display" class="flex justify-center items-center h-48 bg-white border rounded-lg"><span class="text-gray-400 text-sm">Pilih buku</span></div>
                         </div>
                         <div class="text-center p-6 border rounded-xl bg-gray-50">
                             <h4 class="font-medium text-gray-800 mb-4">QR Code Siswa (ID Card)</h4>
-                            <select id="qr-siswa-select" class="w-full p-2 border rounded mb-4 text-sm" onchange="generateQR('siswa')"></select>
+                            <select id="qr-siswa-select" class="w-full p-2 border rounded mb-4 text-sm"></select>
                             <div id="qr-siswa-display" class="flex justify-center items-center h-48 bg-white border rounded-lg"><span class="text-gray-400 text-sm">Pilih siswa</span></div>
                         </div>
                     </div>
@@ -261,7 +252,7 @@
                 <div class="bg-white p-8 rounded-xl shadow-sm border max-w-lg mx-auto">
                     <div class="space-y-4">
                         <div><label class="block text-sm font-medium mb-1 text-gray-600">Batas Waktu Peminjaman (Hari)</label><input id="set-batas" type="number" class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500" placeholder="7"></div>
-                        <div><label class="block text-sm font-medium mb-1 text-gray-600">Biaya Peminjaman per Buku (Rp)</label><input id="set-pinjam" type="number" class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500" placeholder="0"></div>
+                        <div><label class="block text-sm font-medium mb-1 text-gray-600">Biaya Peminjaman per Buku (Rp)</label><input id="set-pinjam" type="number" class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500" placeholder="2000"></div>
                         <div><label class="block text-sm font-medium mb-1 text-gray-600">Denda Keterlambatan per Hari (Rp)</label><input id="set-denda" type="number" class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500" placeholder="1000"></div>
                         <button onclick="savePengaturan()" class="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 mt-4">Simpan Pengaturan</button>
                     </div>
@@ -279,6 +270,7 @@
                         </select>
                         <button onclick="addUser()" class="bg-green-600 text-white rounded text-sm py-2 hover:bg-green-700 font-medium col-span-full">Tambah Pengguna</button>
                     </div>
+                    <p class="text-xs text-gray-400 mb-3">Data pengguna juga bisa diatur langsung di sheet "Users" pada Spreadsheet.</p>
                     <div id="table-users" class="overflow-x-auto"></div>
                 </div>
             </div>
@@ -286,25 +278,18 @@
     </div>
 
     <script>
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbxuLcSFtZ-99Qihurr6P6HoaN1aO7ewQDOXH3HsiMAwLobH-rpJdg97jWehbDl74OvBhg/exec"; // GANTI INI!
-        let currentMode = "", html5QrCode;
+        const GAS_URL = "MASUKAN_URL_WEB_APP_APPS_SCRIPT_DI_SINI";
+        let currentMode = "", stepScan = 1, scannedNISN = "", html5QrCode;
         let chartPinjamInstance = null, chartStatusInstance = null;
         let masterData = { buku: [], siswa: [], katalog: [] };
+        // Token sesi disimpan hanya di memori (bukan localStorage) — sengaja
+        // hilang saat halaman di-refresh, sesuai umur sesi di server (lihat
+        // TOKEN_TTL_SECONDS di Code.gs).
         let authToken = "";
-        let currentRole = "", currentNama = "";
+        let currentRole = "", currentNama = "", currentUsername = "";
         let selectedPdfBase64 = "", selectedPdfFileName = "";
 
         document.getElementById("current-date").innerText = new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-
-        function togglePasswordVisibility() {
-            const passInput = document.getElementById("adminPass");
-            const iconShow = document.getElementById("icon-eye-show");
-            const iconHide = document.getElementById("icon-eye-hide");
-            const willShow = passInput.type === "password";
-            passInput.type = willShow ? "text" : "password";
-            iconShow.classList.toggle("hidden", willShow);
-            iconHide.classList.toggle("hidden", !willShow);
-        }
 
         function toggleSidebar() {
             const sb = document.getElementById('sidebar');
@@ -329,44 +314,29 @@
             setTimeout(() => box.classList.add("hidden"), 5000);
         }
 
-        // --- LOGIN ---
         async function loginAdmin() {
             let username = document.getElementById("adminUser").value;
             let pass = document.getElementById("adminPass").value;
-            if (!username.trim() || !pass) { 
-                showToast("Username dan password wajib diisi!", true); 
-                return; 
-            }
-            
-            // Nonaktifkan tombol agar tidak diklik berulang saat loading
-            showToast("Sedang memproses login...", false);
-
-            try {
-                let res = await fetch(GAS_URL, { 
-                    method: "POST", 
-                    body: JSON.stringify({action: "login", username: username, password: pass}) 
-                });
-                let data = await res.json();
-                
-                if(data.status === "success") {
-                    authToken = data.token;
-                    currentRole = data.role || "";
-                    currentNama = data.nama || "";
-                    document.getElementById("view-login").classList.add("hidden");
-                    document.getElementById("view-admin").classList.remove("hidden");
-                    document.getElementById("sidebar").classList.remove("hidden");
-                    switchTab('dashboard', null);
-                    let dashBtn = document.querySelector('.nav-btn[data-tab="dashboard"]');
-                    if (dashBtn) dashBtn.classList.add('nav-active');
-                } else {
-                    showToast(data.message, true);
-                }
-            } catch(err) {
-                // JIKA ADA ERROR, PESAN ERRORNYA AKAN LANGSUNG TAMPIL DI LAYAR
-                showToast("Gagal terhubung ke server: " + err.message, true);
+            let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify({action: "login", username: username, password: pass}), headers: {"Content-Type": "text/plain;charset=utf-8"} });
+            let data = await res.json();
+            if(data.status === "success") {
+                authToken = data.token;
+                currentRole = data.role || "";
+                currentNama = data.nama || "";
+                currentUsername = (data.username || "").toLowerCase();
+                document.getElementById("view-login").classList.add("hidden");
+                document.getElementById("view-admin").classList.remove("hidden");
+                document.getElementById("sidebar").classList.remove("hidden");
+                // Sebelumnya memakai `event` global dari klik tombol login, sehingga
+                // tombol nav Dashboard tidak pernah ter-highlight. Sekarang cari
+                // tombol nav yang benar secara eksplisit.
+                switchTab('dashboard', null);
+                let dashBtn = document.querySelector('.nav-btn[data-tab="dashboard"]');
+                if (dashBtn) dashBtn.classList.add('nav-active');
+            } else {
+                showToast(data.message, true);
             }
         }
-        
         function logoutAdmin() { window.location.reload(); }
 
         function switchTab(tabName, e) {
@@ -387,6 +357,9 @@
             if(tabName !== 'scan') stopScan();
         }
 
+        // Panel Manajemen Pengguna hanya untuk role Admin — server juga
+        // menolak aksi addUser/updateUser/deleteUser dari role selain Admin,
+        // jadi ini murni soal kerapian UI, bukan satu-satunya lapisan proteksi.
         function loadUserPanel() {
             let panel = document.getElementById("panel-manajemen-user");
             if (currentRole === "Admin") { panel.classList.remove("hidden"); loadUsers(); }
@@ -410,7 +383,7 @@
                 const ctx2 = document.getElementById('chartStatus').getContext('2d');
                 if(chartStatusInstance) chartStatusInstance.destroy();
                 chartStatusInstance = new Chart(ctx2, { type: 'doughnut', data: { labels: ['Tersedia', 'Dipinjam'], datasets: [{ data: d.statusBuku, backgroundColor: ['#10b981', '#f59e0b'], hoverOffset: 4 }] }, options: { responsive: true, cutout: '70%' } });
-            } else if (result.message === "Unauthorized" || result.message.includes("tidak valid")) {
+            } else if (result.message === "Unauthorized") {
                 showToast("Sesi berakhir, silakan login ulang.", true);
                 logoutAdmin();
             }
@@ -421,7 +394,7 @@
             let data = await res.json();
 
             if(data.status !== "success") {
-                if (data.message === "Unauthorized" || data.message.includes("tidak valid")) { showToast("Sesi berakhir, silakan login ulang.", true); logoutAdmin(); }
+                if (data.message === "Unauthorized") { showToast("Sesi berakhir, silakan login ulang.", true); logoutAdmin(); }
                 return;
             }
 
@@ -442,10 +415,15 @@
                     row.forEach((c, colIdx) => {
                         let headerName = data.headers[colIdx];
                         let cellHtml = c;
+
                         if (headerName === "Cover URL" || headerName === "Cover") {
-                            if (c && c.startsWith("data:image")) cellHtml = `<img src="${c}" alt="Cover" class="w-12 h-16 object-cover rounded shadow-sm border">`;
-                            else if (c && c.startsWith("http")) cellHtml = `<img src="${c}" alt="Cover" class="w-12 h-16 object-cover rounded shadow-sm border">`;
-                            else cellHtml = `<div class="w-12 h-16 bg-gray-100 rounded flex items-center justify-center text-gray-400 text-xs">No Cover</div>`;
+                            if (c && c.startsWith("data:image")) {
+                                cellHtml = `<img src="${c}" alt="Cover" class="w-12 h-16 object-cover rounded shadow-sm border">`;
+                            } else if (c && c.startsWith("http")) {
+                                cellHtml = `<img src="${c}" alt="Cover" class="w-12 h-16 object-cover rounded shadow-sm border">`;
+                            } else {
+                                cellHtml = `<div class="w-12 h-16 bg-gray-100 rounded flex items-center justify-center text-gray-400 text-xs">No Cover</div>`;
+                            }
                         }
                         if (headerName === "Status") {
                             let color = c === "Tersedia" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700";
@@ -456,15 +434,20 @@
                     html += `<td class="p-3 border text-center"><button onclick="deleteData('${type}', '${id}')" class="text-red-500 hover:text-red-700"><svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button></td></tr>`;
                 });
             } else if (type === 'transaksi') {
+                // Kolom Aksi khusus untuk Riwayat Transaksi: tombol "Bayar Denda"
+                // muncul kalau ada denda dan belum Lunas (fitur sebelumnya tidak ada).
                 let dendaIdx = data.headers.indexOf("Denda");
                 let statusIdx = data.headers.indexOf("Status");
+                let kodeIdx = 0;
                 html += `<tr>${data.headers.map(h => `<th class="p-3 text-gray-600 font-medium border">${h}</th>`).join('')}<th class="p-3 text-gray-600 font-medium border text-center">Aksi</th></tr></thead><tbody>`;
                 data.data.forEach(row => {
                     let denda = dendaIdx >= 0 ? Number(row[dendaIdx]) : 0;
                     let status = statusIdx >= 0 ? row[statusIdx] : "";
                     let bisaBayar = denda > 0 && status !== "Lunas";
                     html += `<tr class="border-b hover:bg-gray-50">${row.map(c => `<td class="p-3 border">${c}</td>`).join('')}<td class="p-3 border text-center">`;
-                    html += bisaBayar ? `<button onclick="bayarDenda('${row[0]}')" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-md font-medium">Bayar Denda</button>` : `<span class="text-gray-300 text-xs">-</span>`;
+                    html += bisaBayar
+                        ? `<button onclick="bayarDenda('${row[kodeIdx]}')" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-md font-medium">Bayar Denda</button>`
+                        : `<span class="text-gray-300 text-xs">-</span>`;
                     html += `</td></tr>`;
                 });
             } else {
@@ -476,22 +459,23 @@
         }
 
         async function bayarDenda(kodeTransaksi) {
-            if(!confirm(`Catat pembayaran denda untuk ${kodeTransaksi}?`)) return;
-            let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify({action: "bayarDenda", kodeTransaksi, token: authToken}) });
+            if(!confirm(`Catat pembayaran denda untuk transaksi ${kodeTransaksi}?`)) return;
+            let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify({action: "bayarDenda", kodeTransaksi, token: authToken}), headers: {"Content-Type": "text/plain;charset=utf-8"} });
             let data = await res.json();
             showToast(data.message, data.status === "error");
             if(data.status === "success") loadData("transaksi");
         }
 
         async function deleteData(type, id) {
-            if(!confirm(`Yakin hapus data ${id}?`)) return;
+            if(!confirm(`Yakin ingin menghapus data ${id}?`)) return;
             let action = `delete${type.charAt(0).toUpperCase() + type.slice(1)}`;
-            let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify({action: action, id: id, token: authToken}) });
+            let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify({action: action, id: id, token: authToken}), headers: {"Content-Type": "text/plain;charset=utf-8"} });
             let data = await res.json();
             showToast(data.message, data.status === "error");
             if(data.status === "success") loadData(type);
         }
 
+        // Fungsi Upload File ke Base64
         function previewCover(event) {
             const file = event.target.files[0];
             const reader = new FileReader();
@@ -505,26 +489,45 @@
         async function addData(action) {
             let payload = { action, token: authToken };
             if(action == "addBuku") {
-                payload = { ...payload, kodeBuku: document.getElementById("bk-kode").value, judul: document.getElementById("bk-judul").value, pengarang: document.getElementById("bk-pengarang").value, penerbit: document.getElementById("bk-penerbit").value, isbn: document.getElementById("bk-isbn").value, jenis: document.getElementById("bk-jenis").value, jumlah: document.getElementById("bk-jumlah").value, coverUrl: document.getElementById("bk-cover-preview").src || "" };
+                payload = { ...payload, kodeBuku: bkKode.value, judul: bkJudul.value, pengarang: bkPengarang.value, penerbit: bkPenerbit.value, isbn: bkIsbn.value, jenis: bkJenis.value, jumlah: bkJumlah.value, coverUrl: document.getElementById("bk-cover-preview").src || "" };
             } else if(action == "addSiswa") {
-                payload = { ...payload, nisn: document.getElementById("sw-nisn").value, nama: document.getElementById("sw-nama").value, jk: document.getElementById("sw-jk").value, tglLahir: document.getElementById("sw-tgl").value, agama: document.getElementById("sw-agama").value, ayah: document.getElementById("sw-ayah").value, ibu: document.getElementById("sw-ibu").value, hp: document.getElementById("sw-hp").value, kelas: document.getElementById("sw-kelas").value, alamat: document.getElementById("sw-alamat").value };
+                payload = { ...payload, nisn: swNisn.value, nama: swNama.value, jk: swJk.value, tglLahir: swTgl.value, agama: swAgama.value, ayah: swAyah.value, ibu: swIbu.value, hp: swHp.value, kelas: swKelas.value, alamat: swAlamat.value };
             } else if(action == "addGuru") {
-                payload = { ...payload, nip: document.getElementById("gr-nip").value, nama: document.getElementById("gr-nama").value, jk: document.getElementById("gr-jk").value, hp: document.getElementById("gr-hp").value, mapel: document.getElementById("gr-mapel").value, alamat: document.getElementById("gr-alamat").value };
+                payload = { ...payload, nip: grNip.value, nama: grNama.value, jk: grJk.value, hp: grHp.value, mapel: grMapel.value, alamat: grAlamat.value };
             }
 
-            let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify(payload) });
+            let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify(payload), headers: {"Content-Type": "text/plain;charset=utf-8"} });
             let data = await res.json();
             showToast(data.message, data.status === "error");
             if(data.status === "success") {
-                if(action == "addBuku") loadData("buku");
-                if(action == "addSiswa") loadData("siswa");
-                if(action == "addGuru") loadData("guru");
+                if(action == "addBuku") {
+                    bkKode.value=''; bkJudul.value=''; bkPengarang.value='';
+                    bkPenerbit.value=''; bkIsbn.value=''; bkJenis.value='1';
+                    bkJumlah.value='';
+                    document.getElementById("bk-cover-preview").classList.add("hidden");
+                    document.getElementById("bk-cover").value='';
+                    loadData("buku");
+                }
+                if(action == "addSiswa") {
+                    swNisn.value=''; swNama.value=''; swJk.value=''; swTgl.value='';
+                    swAgama.value=''; swAyah.value=''; swIbu.value='';
+                    swHp.value=''; swKelas.value=''; swAlamat.value='';
+                    loadData("siswa");
+                }
+                if(action == "addGuru") {
+                    grNip.value=''; grNama.value=''; grJk.value='';
+                    grHp.value=''; grMapel.value=''; grAlamat.value='';
+                    loadData("guru");
+                }
             }
         }
 
-        // --- KATALOG ---
+        // ==========================================
+        // Katalog Buku Digital (PDF)
+        // ==========================================
         function previewKatalogCover(event) {
             const file = event.target.files[0];
+            if (!file) return;
             const reader = new FileReader();
             reader.onload = function(e) {
                 document.getElementById("kt-cover-preview").src = e.target.result;
@@ -535,20 +538,37 @@
 
         function onPdfSelected(event) {
             const file = event.target.files[0];
-            if(!file) return;
-            document.getElementById("kt-pdf-info").innerText = `${file.name} (${(file.size/1024/1024).toFixed(2)} MB)`;
+            const info = document.getElementById("kt-pdf-info");
+            if (!file) { selectedPdfBase64 = ""; selectedPdfFileName = ""; info.innerText = ""; return; }
+            if (file.type !== "application/pdf") {
+                showToast("File harus berformat PDF", true);
+                event.target.value = "";
+                return;
+            }
+            info.innerText = `Memproses ${file.name} (${(file.size/1024/1024).toFixed(2)} MB)...`;
             const reader = new FileReader();
             reader.onload = function(e) {
+                // Buang prefix "data:application/pdf;base64," — hanya bagian
+                // base64 murni yang dikirim ke server.
                 selectedPdfBase64 = e.target.result.split(",")[1];
                 selectedPdfFileName = file.name;
+                info.innerText = `Siap diunggah: ${file.name} (${(file.size/1024/1024).toFixed(2)} MB)`;
             };
+            reader.onerror = function() { showToast("Gagal membaca file PDF", true); };
             reader.readAsDataURL(file);
         }
 
         async function addKatalog() {
+            let judul = document.getElementById("kt-judul").value.trim();
+            if (!judul) { showToast("Judul wajib diisi", true); return; }
+            if (!selectedPdfBase64) { showToast("Silakan pilih file PDF terlebih dahulu", true); return; }
+
+            let btn = document.getElementById("kt-submit-btn");
+            btn.disabled = true; btn.innerText = "Mengunggah...";
+
             let payload = {
                 action: "addKatalog", token: authToken,
-                judul: document.getElementById("kt-judul").value,
+                judul: judul,
                 pengarang: document.getElementById("kt-pengarang").value,
                 kategori: document.getElementById("kt-kategori").value,
                 deskripsi: document.getElementById("kt-deskripsi").value,
@@ -556,94 +576,94 @@
                 fileBase64: selectedPdfBase64,
                 fileName: selectedPdfFileName
             };
-            let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify(payload) });
-            let data = await res.json();
-            showToast(data.message, data.status === "error");
-            if(data.status === "success") {
-                document.getElementById("kt-judul").value = ""; document.getElementById("kt-pengarang").value = ""; document.getElementById("kt-kategori").value = ""; document.getElementById("kt-deskripsi").value = "";
-                document.getElementById("kt-cover").value = ""; document.getElementById("kt-cover-preview").classList.add("hidden"); document.getElementById("kt-pdf").value = ""; document.getElementById("kt-pdf-info").innerText = "";
-                loadKatalogGrid();
+            try {
+                let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify(payload), headers: {"Content-Type": "text/plain;charset=utf-8"} });
+                let data = await res.json();
+                showToast(data.message, data.status === "error");
+                if (data.status === "success") {
+                    ["kt-judul","kt-pengarang","kt-kategori","kt-deskripsi"].forEach(id => document.getElementById(id).value = "");
+                    document.getElementById("kt-cover-preview").classList.add("hidden");
+                    document.getElementById("kt-pdf").value = "";
+                    document.getElementById("kt-pdf-info").innerText = "";
+                    selectedPdfBase64 = ""; selectedPdfFileName = "";
+                    loadKatalogGrid();
+                }
+            } finally {
+                btn.disabled = false; btn.innerText = "Tambah ke Katalog";
             }
         }
 
         async function loadKatalogGrid() {
             let res = await fetch(`${GAS_URL}?action=getKatalog&token=${authToken}`);
-            let result = await res.json();
-            if(result.status !== "success") return;
-            masterData.katalog = result.data;
+            let data = await res.json();
+            if (data.status !== "success") {
+                if (data.message === "Unauthorized") { showToast("Sesi berakhir, silakan login ulang.", true); logoutAdmin(); }
+                return;
+            }
+            masterData.katalog = data.data;
+            let h = data.headers;
+            let idxJudul = h.indexOf("Judul"), idxPengarang = h.indexOf("Pengarang"), idxKategori = h.indexOf("Kategori"),
+                idxDeskripsi = h.indexOf("Deskripsi"), idxCover = h.indexOf("Cover URL"), idxFileId = h.indexOf("Drive File ID"),
+                idxKode = 0;
+
             let grid = document.getElementById("grid-katalog");
-            grid.innerHTML = "";
-            result.data.forEach(item => {
-                let cover = item[5] && item[5].startsWith("data:image") ? item[5] : "https://via.placeholder.com/150x200?text=No+Cover";
-                let fileId = item[6];
-                let pdfUrl = `https://drive.google.com/file/d/${fileId}/preview`;
-                grid.innerHTML += `
-                <div class="bg-white border rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
-                    <img src="${cover}" class="w-full h-48 object-cover" alt="Cover">
-                    <div class="p-4">
-                        <h4 class="font-bold text-gray-800 text-sm mb-1 truncate">${item[1]}</h4>
-                        <p class="text-xs text-gray-500 mb-2">${item[2] || 'Tidak diketahui'}</p>
-                        <button onclick="openPdf('${pdfUrl}')" class="w-full bg-blue-600 text-white text-xs py-2 rounded-md hover:bg-blue-700">Baca Buku</button>
-                        <button onclick="deleteKatalog('${item[0]}')" class="w-full mt-2 bg-red-50 text-red-600 text-xs py-2 rounded-md hover:bg-red-100">Hapus</button>
+            if (data.data.length === 0) {
+                grid.innerHTML = `<p class="text-gray-400 text-sm col-span-full">Belum ada buku digital. Tambahkan lewat form di atas.</p>`;
+                return;
+            }
+            grid.innerHTML = data.data.map(row => {
+                let kode = row[idxKode];
+                let cover = row[idxCover];
+                let coverHtml = cover ? `<img src="${cover}" class="w-full h-40 object-cover rounded-t-lg">` : `<div class="w-full h-40 bg-gray-100 rounded-t-lg flex items-center justify-center text-gray-400 text-xs">No Cover</div>`;
+                let pdfUrl = `https://drive.google.com/file/d/${row[idxFileId]}/view`;
+                return `<div class="border rounded-lg overflow-hidden bg-gray-50 flex flex-col katalog-card" data-search="${(row[idxJudul]+' '+row[idxPengarang]+' '+row[idxKategori]).toLowerCase()}">
+                    ${coverHtml}
+                    <div class="p-3 flex-1 flex flex-col">
+                        <h4 class="font-medium text-sm text-gray-800 line-clamp-2">${row[idxJudul]}</h4>
+                        <p class="text-xs text-gray-500 mb-1">${row[idxPengarang] || '-'}</p>
+                        ${row[idxKategori] ? `<span class="inline-block w-fit px-2 py-0.5 rounded-full text-[10px] font-medium bg-blue-100 text-blue-700 mb-2">${row[idxKategori]}</span>` : ''}
+                        <p class="text-xs text-gray-400 flex-1 line-clamp-3">${row[idxDeskripsi] || ''}</p>
+                        <div class="flex gap-2 mt-3">
+                            <a href="${pdfUrl}" target="_blank" rel="noopener" class="flex-1 text-center bg-blue-600 hover:bg-blue-700 text-white text-xs py-1.5 rounded-md font-medium">Baca PDF</a>
+                            <button onclick="deleteKatalog('${kode}')" class="px-2 bg-red-50 text-red-500 hover:bg-red-100 rounded-md"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
+                        </div>
                     </div>
                 </div>`;
+            }).join("");
+        }
+
+        function filterKatalogCards(query) {
+            let q = query.toLowerCase();
+            document.querySelectorAll('.katalog-card').forEach(card => {
+                card.style.display = card.dataset.search.includes(q) ? '' : 'none';
             });
         }
 
-        function openPdf(url) {
-            window.open(url, '_blank');
-        }
-
-        async function deleteKatalog(id) {
-            if(!confirm("Hapus buku digital ini?")) return;
-            let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify({action: "deleteKatalog", id: id, token: authToken}) });
+        async function deleteKatalog(kode) {
+            if (!confirm(`Yakin ingin menghapus buku digital ini beserta file PDF-nya?`)) return;
+            let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify({action: "deleteKatalog", id: kode, token: authToken}), headers: {"Content-Type": "text/plain;charset=utf-8"} });
             let data = await res.json();
             showToast(data.message, data.status === "error");
-            if(data.status === "success") loadKatalogGrid();
+            if (data.status === "success") loadKatalogGrid();
         }
 
-        function filterKatalogCards(keyword) {
-            let cards = document.getElementById("grid-katalog").children;
-            for(let card of cards) {
-                if(card.innerText.toLowerCase().includes(keyword.toLowerCase())) card.style.display = "";
-                else card.style.display = "none";
-            }
-        }
-
-        // --- QR CODE ---
-        async function loadQRGenerator() {
-            if(masterData.buku.length === 0) {
-                let res = await fetch(`${GAS_URL}?action=getBuku&token=${authToken}`);
-                let data = await res.json(); if(data.status === "success") masterData.buku = data.data;
-            }
-            if(masterData.siswa.length === 0) {
-                let res = await fetch(`${GAS_URL}?action=getSiswa&token=${authToken}`);
-                let data = await res.json(); if(data.status === "success") masterData.siswa = data.data;
-            }
-            let selBuku = document.getElementById("qr-buku-select");
-            let selSiswa = document.getElementById("qr-siswa-select");
-            selBuku.innerHTML = `<option value="">-- Pilih Buku --</option>`;
-            selSiswa.innerHTML = `<option value="">-- Pilih Siswa --</option>`;
-            masterData.buku.forEach(b => selBuku.innerHTML += `<option value="${b[0]}">${b[0]} - ${b[1]}</option>`);
-            masterData.siswa.forEach(s => selSiswa.innerHTML += `<option value="${s[0]}">${s[0]} - ${s[1]}</option>`);
-        }
-
-        function generateQR(type) {
-            let val = type === 'buku' ? document.getElementById("qr-buku-select").value : document.getElementById("qr-siswa-select").value;
-            let display = document.getElementById(`qr-${type}-display`);
-            if(!val) { display.innerHTML = `<span class="text-gray-400 text-sm">Pilih ${type}</span>`; return; }
-            let url = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(val)}`;
-            display.innerHTML = `<img src="${url}" alt="QR Code" class="w-48 h-48">`;
-        }
-
-        // --- MANAJEMEN USER ---
+        // ==========================================
+        // Manajemen Pengguna (khusus Admin)
+        // ==========================================
         async function loadUsers() {
             let res = await fetch(`${GAS_URL}?action=getUsers&token=${authToken}`);
             let data = await res.json();
-            if(data.status !== "success") return;
-            let html = `<table class="w-full text-sm text-left border-collapse"><thead class="bg-gray-50 border-b"><tr><th class="p-3 border">Username</th><th class="p-3 border">Nama Lengkap</th><th class="p-3 border">Role</th><th class="p-3 border text-center">Aksi</th></tr></thead><tbody>`;
+            if (data.status !== "success") {
+                document.getElementById("table-users").innerHTML = `<p class="text-sm text-gray-400">${data.message}</p>`;
+                return;
+            }
+            let html = `<table class="w-full text-sm text-left border-collapse"><thead class="bg-gray-50 border-b"><tr>` +
+                data.headers.map(h => `<th class="p-2 text-gray-600 font-medium border">${h}</th>`).join('') +
+                `<th class="p-2 text-gray-600 font-medium border text-center">Aksi</th></tr></thead><tbody>`;
             data.data.forEach(row => {
-                html += `<tr class="border-b"><td class="p-3 border">${row[0]}</td><td class="p-3 border">${row[1]}</td><td class="p-3 border">${row[2]}</td><td class="p-3 border text-center"><button onclick="deleteUser('${row[0]}')" class="text-red-500 hover:text-red-700 text-xs">Hapus</button></td></tr>`;
+                let username = row[0];
+                html += `<tr class="border-b hover:bg-gray-50">${row.map(c => `<td class="p-2 border">${c}</td>`).join('')}` +
+                    `<td class="p-2 border text-center">${username.toLowerCase() === currentUsername ? '<span class="text-gray-300 text-xs">Anda</span>' : `<button onclick="deleteUser('${username}')" class="text-red-500 hover:text-red-700 text-xs font-medium">Hapus</button>`}</td></tr>`;
             });
             html += `</tbody></table>`;
             document.getElementById("table-users").innerHTML = html;
@@ -652,102 +672,123 @@
         async function addUser() {
             let payload = {
                 action: "addUser", token: authToken,
-                username: document.getElementById("us-username").value,
+                username: document.getElementById("us-username").value.trim(),
                 password: document.getElementById("us-password").value,
-                nama: document.getElementById("us-nama").value,
+                nama: document.getElementById("us-nama").value.trim(),
                 role: document.getElementById("us-role").value
             };
-            let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify(payload) });
+            if (!payload.username || !payload.password || !payload.nama) { showToast("Username, password, dan nama wajib diisi", true); return; }
+            let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify(payload), headers: {"Content-Type": "text/plain;charset=utf-8"} });
             let data = await res.json();
             showToast(data.message, data.status === "error");
-            if(data.status === "success") { document.getElementById("us-username").value=""; document.getElementById("us-password").value=""; document.getElementById("us-nama").value=""; loadUsers(); }
+            if (data.status === "success") {
+                ["us-username","us-password","us-nama"].forEach(id => document.getElementById(id).value = "");
+                loadUsers();
+            }
         }
 
         async function deleteUser(username) {
-            if(!confirm(`Hapus pengguna ${username}?`)) return;
-            let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify({action: "deleteUser", username: username, token: authToken}) });
+            if (!confirm(`Yakin ingin menghapus pengguna "${username}"?`)) return;
+            let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify({action: "deleteUser", username, token: authToken}), headers: {"Content-Type": "text/plain;charset=utf-8"} });
             let data = await res.json();
             showToast(data.message, data.status === "error");
-            if(data.status === "success") loadUsers();
+            if (data.status === "success") loadUsers();
         }
 
-        // --- PENGATURAN ---
+        async function loadQRGenerator() {
+            if(masterData.buku.length === 0) await loadData('buku');
+            if(masterData.siswa.length === 0) await loadData('siswa');
+            let selectBuku = document.getElementById("qr-buku-select");
+            selectBuku.innerHTML = "<option value=''>-- Pilih Buku --</option>" + masterData.buku.map(b => `<option value="${b[0]}">${b[1]} (${b[0]})</option>`).join("");
+            let selectSiswa = document.getElementById("qr-siswa-select");
+            selectSiswa.innerHTML = "<option value=''>-- Pilih Siswa --</option>" + masterData.siswa.map(s => `<option value="${s[0]}">${s[1]} (${s[0]})</option>`).join("");
+        }
+        document.getElementById("qr-buku-select").addEventListener("change", function() {
+            let id = this.value;
+            let disp = document.getElementById("qr-buku-display");
+            if(id) disp.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${id}" alt="QR Buku">`;
+            else disp.innerHTML = "<span class='text-gray-400 text-sm'>Pilih buku</span>";
+        });
+        document.getElementById("qr-siswa-select").addEventListener("change", function() {
+            let id = this.value;
+            let disp = document.getElementById("qr-siswa-display");
+            if(id) disp.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${id}" alt="QR Siswa">`;
+            else disp.innerHTML = "<span class='text-gray-400 text-sm'>Pilih siswa</span>";
+        });
+
         async function loadPengaturan() {
             let res = await fetch(`${GAS_URL}?action=getPengaturan&token=${authToken}`);
-            let result = await res.json();
-            if(result.status === "success") {
-                document.getElementById("set-batas").value = result.data.BatasWaktuHari || 7;
-                document.getElementById("set-pinjam").value = result.data.BiayaPinjam || 0;
-                document.getElementById("set-denda").value = result.data.DendaPerHari || 1000;
+            let data = await res.json();
+            if(data.status === "success") {
+                document.getElementById("set-batas").value = data.data.BatasWaktuHari || 7;
+                document.getElementById("set-pinjam").value = data.data.BiayaPinjam || 0;
+                document.getElementById("set-denda").value = data.data.DendaPerHari || 0;
             }
         }
-
         async function savePengaturan() {
-            let settings = {
-                BatasWaktuHari: document.getElementById("set-batas").value,
-                BiayaPinjam: document.getElementById("set-pinjam").value,
-                DendaPerHari: document.getElementById("set-denda").value
-            };
-            let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify({action: "savePengaturan", settings: settings, token: authToken}) });
+            let settings = { BatasWaktuHari: document.getElementById("set-batas").value, BiayaPinjam: document.getElementById("set-pinjam").value, DendaPerHari: document.getElementById("set-denda").value };
+            let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify({action: "savePengaturan", settings: settings, token: authToken}), headers: {"Content-Type": "text/plain;charset=utf-8"} });
             let data = await res.json();
             showToast(data.message, data.status === "error");
         }
 
-        // --- SCANNER QR ---
-        function startScan(mode) {
-            currentMode = mode;
+        document.getElementById("btnPinjam").addEventListener("click", () => startProcess("pinjam"));
+        document.getElementById("btnKembali").addEventListener("click", () => startProcess("kembali"));
+
+        function startProcess(mode) {
+            currentMode = mode; stepScan = 1; scannedNISN = "";
             document.getElementById("scannerSection").classList.remove("hidden");
-            document.getElementById("scanTitle").innerText = mode === 'pinjam' ? "Scan QR Siswa lalu QR Buku" : "Scan QR Buku untuk Dikembalikan";
-            
+            document.getElementById("scanTitle").innerText = mode === "pinjam" ? "Langkah 1: Scan ID Card" : "Scan QR Buku";
+            startScanner();
+        }
+        function startScanner() {
             html5QrCode = new Html5Qrcode("reader");
-            html5QrCode.start(
-                { facingMode: "environment" },
-                { fps: 10, qrbox: { width: 250, height: 250 } },
-                onScanSuccess,
-                () => {}
-            ).catch(err => {
-                showToast("Gagal mengakses kamera: " + err, true);
+            html5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: { width: 250, height: 250 } }, onScanSuccess, () => {});
+        }
+        async function onScanSuccess(decodedText) {
+            stopScan();
+            if (currentMode === "pinjam") {
+                if (stepScan === 1) {
+                    scannedNISN = decodedText;
+                    showAlert("ID Terdeteksi: " + decodedText + ". Silakan scan buku.");
+                    stepScan = 2;
+                    document.getElementById("scanTitle").innerText = "Langkah 2: Scan Buku";
+                    startScanner();
+                } else {
+                    let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify({action: "pinjam", nisn: scannedNISN, kodeBuku: decodedText, token: authToken}), headers: {"Content-Type": "text/plain;charset=utf-8"} });
+                    let data = await res.json();
+                    showAlert(data.message, data.status === "error");
+                    document.getElementById("scannerSection").classList.add("hidden");
+                }
+            } else {
+                let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify({action: "kembali", kodeBuku: decodedText, token: authToken}), headers: {"Content-Type": "text/plain;charset=utf-8"} });
+                let data = await res.json();
+                showAlert(data.message, data.status === "error");
                 document.getElementById("scannerSection").classList.add("hidden");
+            }
+        }
+        function stopScan() {
+            if (html5QrCode && html5QrCode.isScanning) {
+                html5QrCode.stop().then(() => html5QrCode.clear()).catch(err => console.error(err));
+            }
+        }
+        function filterTable(tableId, query) {
+            const table = document.getElementById(tableId);
+            const trs = table.querySelectorAll('tbody tr');
+            trs.forEach(tr => {
+                let txt = tr.textContent.toLowerCase();
+                tr.style.display = txt.includes(query.toLowerCase()) ? '' : 'none';
             });
         }
 
-        let stepScan = 1, scannedNISN = "";
-        async function onScanSuccess(decodedText) {
-            if(currentMode === "pinjam") {
-                if(stepScan === 1) {
-                    scannedNISN = decodedText;
-                    showAlert(`Siswa: ${scannedNISN} terdeteksi. Silakan scan Buku.`);
-                    stepScan = 2;
-                } else if(stepScan === 2) {
-                    stopScan();
-                    let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify({action: "pinjam", nisn: scannedNISN, kodeBuku: decodedText, token: authToken}) });
-                    let data = await res.json();
-                    showAlert(data.message, data.status === "error");
-                    stepScan = 1; scannedNISN = "";
-                }
-            } else if(currentMode === "kembali") {
-                stopScan();
-                let res = await fetch(GAS_URL, { method: "POST", body: JSON.stringify({action: "kembali", kodeBuku: decodedText, token: authToken}) });
-                let data = await res.json();
-                showAlert(data.message, data.status === "error");
-            }
-        }
+        const bkKode = document.getElementById('bk-kode'), bkJudul = document.getElementById('bk-judul'), bkPengarang = document.getElementById('bk-pengarang'), bkPenerbit = document.getElementById('bk-penerbit'), bkIsbn = document.getElementById('bk-isbn'), bkJenis = document.getElementById('bk-jenis'), bkJumlah = document.getElementById('bk-jumlah');
+        const swNisn = document.getElementById('sw-nisn'), swNama = document.getElementById('sw-nama'), swJk = document.getElementById('sw-jk'), swTgl = document.getElementById('sw-tgl'), swAgama = document.getElementById('sw-agama'), swAyah = document.getElementById('sw-ayah'), swIbu = document.getElementById('sw-ibu'), swHp = document.getElementById('sw-hp'), swKelas = document.getElementById('sw-kelas'), swAlamat = document.getElementById('sw-alamat');
+        const grNip = document.getElementById('gr-nip'), grNama = document.getElementById('gr-nama'), grJk = document.getElementById('gr-jk'), grHp = document.getElementById('gr-hp'), grMapel = document.getElementById('gr-mapel'), grAlamat = document.getElementById('gr-alamat');
 
-        function stopScan() {
-            if(html5QrCode && html5QrCode.isScanning) {
-                html5QrCode.stop().then(() => {
-                    document.getElementById("scannerSection").classList.add("hidden");
-                }).catch(() => {});
-            }
-        }
-
-        function filterTable(tableId, keyword) {
-            let table = document.getElementById(tableId);
-            let trs = table.getElementsByTagName("tr");
-            for(let i = 1; i < trs.length; i++) {
-                if(trs[i].innerText.toLowerCase().includes(keyword.toLowerCase())) trs[i].style.display = "";
-                else trs[i].style.display = "none";
-            }
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').then(registration => console.log('ServiceWorker registration successful')).catch(err => console.log('ServiceWorker registration failed: ', err));
+            });
         }
     </script>
 </body>
