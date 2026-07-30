@@ -27,6 +27,20 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('fetch', event => {
+  // Jangan cache request ke domain lain (API Apps Script) supaya data
+  // selalu segar dari server. Hanya cache aset lokal (HTML, JS, CSS).
+  if (!event.request.url.startsWith(self.location.origin)) {
+    event.respondWith(
+      fetch(event.request).catch(() => {
+        return new Response(JSON.stringify({ status: "error", message: "Tidak ada koneksi internet" }), {
+          status: 503,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      })
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then(response => {
@@ -45,7 +59,7 @@ self.addEventListener('fetch', event => {
               });
             return response;
           }
-        ).catch(() => caches.match(event.request));
+        );
       })
   );
 });
